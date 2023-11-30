@@ -9,25 +9,25 @@ st.set_page_config(layout="wide")
 title1, title2 = st.columns([0.7, 0.3])
 
 with title1 :
-  st.title('Projet 2 : Système de recommandation de films')
+  st.header('Projet 2 : Système de recommandation de films')
 with title2 :
-  "Olmira, Mireille, Maxime, Julie" 
-  st.image('logo_WCS.png')
+  "Julie, Mireille, Olmira, Maxime" 
+  st.image('/app/groupeomjm1/pages/logo_WCS.png')
 
 #####
 
 
-st.title('Première partie : Analyse de données')
+st.subheader('Première partie : Analyse de données')
 
 st.write("Il nous a été demandé premièrement de nettoyer et analyser une base de données contenant les caractérisqtiques de nombreux films, et d'en extraire une selection à proposer à un cinéma Français en perte de vitesse.")
 
-st.title('Filtrer sur les notes et les votes attribués aux films')
+st.subheader('Filtrer sur les notes et les votes attribués aux films')
 
 st.write("Après un premier niveau de filtrage, nous vous proposons d'affiner la sélection en choisissant une note minimum ainsi qu'un nombre de votes minimum pour les films qui seront retenus.")
 st.write("La sélection présentée ici répond aux critères suivants : Retrait des films pour adultes, année supérieure ou égale à 1980, version du film destinée à la France.")
 
 #Chargement du DataFrame étudié :
-df = pd.read_csv('final0.csv')
+df = pd.read_csv('/app/groupeomjm1/pages/final0.csv')
 df.drop(df.loc[df["genres"].str.contains('Adult')].index, inplace=True)
 df.drop(df.loc[df["genres"].str.contains('Game-Show')].index, inplace=True)
 df.drop(df.loc[df["genres"].str.contains('Reality-TV')].index, inplace=True)
@@ -56,7 +56,7 @@ with col2_df :
 
 f"Précision : parmi ces films, {isna_['averageRating'][1]} n'ont pas de note. Ils seront donc ignorés dans l'analyse qui suit."
 
-st.title('Ajustement de la selection')
+st.subheader('Ajustement de la selection')
 
 "Nous vous proposons d'effectuer un ajustement par la note, le nombre de votes et éventuellement le genre, et visualiser l'impact de vos choix :"
 
@@ -82,7 +82,7 @@ if genre != "(tous)" :
 if genre == "(tous)" :
   select = df[(df['averageRating'] >= note) & (df['numVotes'] >= votes)]
 
-st.title('Statistiques visuelles pour votre sélection :')
+st.subheader('Statistiques visuelles pour votre sélection :')
 
 f"Les critères sélectionnés réduisent votre sélection à {select['tconst'].nunique()} films (liste sous les graphiques) :"
 
@@ -143,33 +143,48 @@ dfposter = select[(select['poster_path'].notnull())]
 imagerandom = pd.DataFrame(dfposter[['poster_path', 'title']].sample(10))
 
 im1, im2, im3, im4, im5 = st.columns(5)
+im6, im7, im8, im9, im10 = st.columns(5)
 
 with im1 :
-  for i in range(0,2) :
-    st.write(str(imagerandom.iloc[i,1]))
-    st.image('https://image.tmdb.org/t/p/w600_and_h900_bestv2/' + str(imagerandom.iloc[i,0]), width = 200)
+  st.image('https://image.tmdb.org/t/p/w600_and_h900_bestv2/' + str(imagerandom.iloc[0,0]), width = 200)
+  st.write(str(imagerandom.iloc[0,1]))
 
 with im2 :
-  for i in range(2,4) :
-    st.write(str(imagerandom.iloc[i,1]))
-    st.image('https://image.tmdb.org/t/p/w600_and_h900_bestv2/' + str(imagerandom.iloc[i,0]), width = 200)
+  st.image('https://image.tmdb.org/t/p/w600_and_h900_bestv2/' + str(imagerandom.iloc[1,0]), width = 200)
+  st.write(str(imagerandom.iloc[1,1]))
 
 with im3 :
-  for i in range(4,6) :
-    st.write(str(imagerandom.iloc[i,1]))
-    st.image('https://image.tmdb.org/t/p/w600_and_h900_bestv2/' + str(imagerandom.iloc[i,0]), width = 200)
+  st.image('https://image.tmdb.org/t/p/w600_and_h900_bestv2/' + str(imagerandom.iloc[2,0]), width = 200)
+  st.write(str(imagerandom.iloc[2,1]))
     
 with im4 :
-  for i in range(6,8) :
-    st.write(str(imagerandom.iloc[i,1]))
-    st.image('https://image.tmdb.org/t/p/w600_and_h900_bestv2/' + str(imagerandom.iloc[i,0]), width = 200)
+  st.image('https://image.tmdb.org/t/p/w600_and_h900_bestv2/' + str(imagerandom.iloc[3,0]), width = 200)
+  st.write(str(imagerandom.iloc[3,1]))
 
 with im5 :
-  for i in range(8,10) :
-    st.write(str(imagerandom.iloc[i,1]))
-    st.image('https://image.tmdb.org/t/p/w600_and_h900_bestv2/' + str(imagerandom.iloc[i,0]), width = 200)
+  st.image('https://image.tmdb.org/t/p/w600_and_h900_bestv2/' + str(imagerandom.iloc[4,0]), width = 200)
+  st.write(str(imagerandom.iloc[4,1]))
+  
+with im6 :
+  st.image('https://image.tmdb.org/t/p/w600_and_h900_bestv2/' + str(imagerandom.iloc[5,0]), width = 200)
+  st.write(str(imagerandom.iloc[5,1]))
+  
+with im7 :
+  st.image('https://image.tmdb.org/t/p/w600_and_h900_bestv2/' + str(imagerandom.iloc[6,0]), width = 200)
+  st.write(str(imagerandom.iloc[6,1]))
+  
+with im8 :
+  st.image('https://image.tmdb.org/t/p/w600_and_h900_bestv2/' + str(imagerandom.iloc[7,0]), width = 200)
+  st.write(str(imagerandom.iloc[7,1]))
+  
+with im9 :
+  st.image('https://image.tmdb.org/t/p/w600_and_h900_bestv2/' + str(imagerandom.iloc[8,0]), width = 200)
+  st.write(str(imagerandom.iloc[8,1]))
 
-
+with im10 :
+  st.image('https://image.tmdb.org/t/p/w600_and_h900_bestv2/' + str(imagerandom.iloc[9,0]), width = 200)
+  st.write(str(imagerandom.iloc[9,1]))
+  
 #st.write(imagerandom.iloc[i])
 #st.image('https://image.tmdb.org/t/p/w600_and_h900_bestv2/' + imagerandom, width = 200)
 
